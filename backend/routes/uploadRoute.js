@@ -1,6 +1,8 @@
 const { Router } = require("express");
 const router = Router();
 const User = require("../models/users");
+const uploadMiddleware = require("../middlewares/multerMiddleware");
+const Images = require("../models/image");
 
 // Corrected route path with a leading slash
 router.post("/api/save", (req, res) => {
@@ -61,5 +63,11 @@ router.post("/api/login", async (req, res) => {
         res.status(400).json({ message: "Login failed." });
     }
 });
+
+
+router.get("/api/get", async (req, res) => {
+    const allPhotos = await Images.find().sort({ createdAt: "descending" });
+    res.send(allPhotos);
+  });
 
 module.exports = router;
