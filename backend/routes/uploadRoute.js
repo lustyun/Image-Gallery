@@ -64,6 +64,7 @@ router.post("/api/login", async (req, res) => {
     }
 });
 
+// GET Images
 router.get("/api/get", async (req, res) => {
     const allPhotos = await Images.find().sort({ createdAt: "descending" });
     res.send(allPhotos);
@@ -74,7 +75,7 @@ router.post("/api/save", uploadMiddleware.single("photo"), (req, res) => {
 
     console.log(photo);
 
-    UploadModel.create({ photo })
+    Images.create({ photo })
         .then((data) => {
             console.log("Uploaded Successfully...");
             console.log(data);
