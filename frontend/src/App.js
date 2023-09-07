@@ -3,7 +3,12 @@ import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 
 function App() {
-    return <Navbar />;
+    return (
+        <>
+            <Navbar />;
+            
+        </>
+    );
 }
 
 export default App;

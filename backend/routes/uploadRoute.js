@@ -1,13 +1,8 @@
 const { Router } = require("express");
 const router = Router();
-const User = require("../models/users");
+const User = require("../models/user");
 const uploadMiddleware = require("../middlewares/multerMiddleware");
 const Images = require("../models/image");
-
-// Corrected route path with a leading slash
-router.post("/api/save", (req, res) => {
-    res.send("Handling GET requests...");
-});
 
 // Registration endpoint
 router.post("/api/register", async (req, res) => {
