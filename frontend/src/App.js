@@ -19,9 +19,11 @@ function App() {
     }, [updateUI]);
 
     return (
-        <>
-            <Navbar />;
-        </>
+        <div className="App">
+            <Navbar />
+            <Grid photos={photos} />
+            <Button setUpdateUI={setUpdateUI} />
+        </div>
     );
 }
 
