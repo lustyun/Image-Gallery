@@ -26,15 +26,16 @@ const Grid = ({ photos, setPhotos }) => {
         <>
             <h1>Our Gallery</h1>
             <div className="grid">
-                {photos.map(({ photo, _id }) => (
+                {photos.map(({ fileName, photo, _id }) => (
                     <div key={_id} className="grid__item">
-                        <button onClick={() => handleDelete(_id)}>
-                            Delete
-                        </button>
                         <img
                             src={`http://localhost:5000/uploads/${photo}`}
                             alt="grid_image"
                         />
+                        <button onClick={() => handleDelete(_id)}>
+                            Delete
+                        </button>
+                        <h2>{fileName}</h2>
                     </div>
                 ))}
             </div>

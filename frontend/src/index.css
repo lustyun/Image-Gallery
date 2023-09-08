@@ -37,16 +37,39 @@ nav {
 }
 
 .grid__item {
-    height: 26rem;
+    display: flex; /* Use flex display for aligning items vertically */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    height: 30rem;
+    color: #fff;
     border-radius: 6px;
+    background-color: #474a51;
     overflow: hidden;
     box-shadow: 0 0px 10px rgba(0, 0, 0, 0.25);
 }
 
 .grid__item img {
     width: 100%;
-    height: 100%;
+    height: 100%; /* Let the image determine its own height */
     object-fit: cover;
+}
+@media (max-width: 1568px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 1068px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* For screens up to 480px wide */
+@media (max-width: 550px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 h1 {
