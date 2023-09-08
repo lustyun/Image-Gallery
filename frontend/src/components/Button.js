@@ -10,7 +10,7 @@ const Button = ({ setUpdateUI }) => {
         formData.append("photo", e.target.files[0]);
 
         axios
-            .post("http://localhost:5000/api/save", formData)
+            .post("http://localhost:3000/api/save", formData)
             .then((res) => {
                 console.log(res.data);
                 setUpdateUI(res.data._id);
@@ -30,3 +30,5 @@ const Button = ({ setUpdateUI }) => {
         </label>
     );
 };
+
+export default Button
