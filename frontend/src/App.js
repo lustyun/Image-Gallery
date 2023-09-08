@@ -10,7 +10,7 @@ function App() {
 
     useEffect(() => {
         axios
-            .get("http://localhost:3000/api/get")
+            .get("http://localhost:5000/api/get")
             .then((res) => {
                 console.log(res.data);
                 setPhotos(res.data);
@@ -21,7 +21,7 @@ function App() {
     return (
         <div className="App">
             <Navbar />
-            <Grid photos={photos} />
+            <Grid setPhotos={setPhotos} photos={photos} />
             <Button setUpdateUI={setUpdateUI} />
         </div>
     );

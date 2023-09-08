@@ -3,6 +3,8 @@ const router = Router();
 const User = require("../models/user");
 const uploadMiddleware = require("../middlewares/multerMiddleware");
 const Images = require("../models/image");
+const fs = require("fs");
+const path = require("path");
 
 // Registration endpoint
 router.post("/api/register", async (req, res) => {
@@ -65,6 +67,7 @@ router.get("/api/get", async (req, res) => {
     res.send(allPhotos);
 });
 
+// Create Image
 router.post("/api/save", uploadMiddleware.single("photo"), (req, res) => {
     const photo = req.file.filename;
 
@@ -78,5 +81,7 @@ router.post("/api/save", uploadMiddleware.single("photo"), (req, res) => {
         })
         .catch((err) => console.log(err));
 });
+
+
 
 module.exports = router;
