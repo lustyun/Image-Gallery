@@ -70,10 +70,10 @@ router.get("/api/get", async (req, res) => {
 // Create Image
 router.post("/api/save", uploadMiddleware.single("photo"), (req, res) => {
     const photo = req.file.filename;
-
+    const fileName = req.body.fileName;
     console.log(photo);
 
-    Images.create({ photo })
+    Images.create({ photo, fileName })
         .then((data) => {
             console.log("Uploaded Successfully...");
             console.log(data);
@@ -95,6 +95,7 @@ router.delete("/api/delete/:id", (req, res) => {
             // Get the file path of the image to be deleted
             const filePath = path.join(
                 __dirname,
+                "..",
                 "public",
                 "uploads",
                 data.photo
