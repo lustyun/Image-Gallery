@@ -82,6 +82,46 @@ router.post("/api/save", uploadMiddleware.single("photo"), (req, res) => {
         .catch((err) => console.log(err));
 });
 
+// DELETE Image
+router.delete("/api/delete/:id", (req, res) => {
+    const id = req.params.id;
 
+    Images.findByIdAndRemove(id)
+        .then((data) => {
+            if (!data) {
+                return res.status(404).send("Image not found");
+            }
+
+            // Get the file path of the image to be deleted
+            const filePath = path.join(
+                __dirname,
+                "public",
+                "uploads",
+                data.photo
+            );
+
+            // Use fs.unlink to delete the file from the local file system
+            if (fs.existsSync(filePath)) {
+                // Use fs.unlink to delete the file from the local file system
+                fs.unlink(filePath, (err) => {
+                    if (err) {
+                        console.log("Error deleting file:", err);
+                        return res.status(500).send("Error deleting file");
+                    }
+
+                    console.log("Deleted Successfully...");
+                    console.log(data);
+                    res.send(data);
+                });
+            } else {
+                console.log("File does not exist:", filePath);
+                res.send(data);
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).send("Internal Server Error");
+        });
+});
 
 module.exports = router;
