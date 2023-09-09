@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 
 const uploadSchema = new mongoose.Schema(
     {
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: "User",
+        },
         photo: {
             type: String,
             required: true,
@@ -11,4 +16,4 @@ const uploadSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-module.exports = mongoose.model("Upload", uploadSchema);
+module.exports = mongoose.model("Images", uploadSchema);
