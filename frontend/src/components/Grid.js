@@ -47,7 +47,7 @@ const Grid = ({ photos, setPhotos, setUpdateUI }) => {
                     </div>
                 ))}
             </div>
-            <Button setUpdateUI={setUpdateUI} />;
+            <Button setUpdateUI={setUpdateUI} />
         </>
     );
 };
