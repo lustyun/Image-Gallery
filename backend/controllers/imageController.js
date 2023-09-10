@@ -27,8 +27,9 @@ const createImage = asyncHandler(async (req, res) => {
 const updateImage = asyncHandler(async (req, res) => {
     console.log("Update route reached");
     const id = req.params.id;
-    const { newFilename } = req.body; // Assuming you send the new filename in the request body
+    const newFilename = req.body; // Assuming you send the new filename in the request body
 
+    console.log("req body", newFilename);
     const image = await Images.findById(id);
 
     if (!image) {
@@ -41,7 +42,7 @@ const updateImage = asyncHandler(async (req, res) => {
     }
 
     // Update the image's filename
-    image.fileName = newFilename;
+    image.fileName = newFilename.fileName;
 
     // Save the updated image
     await image.save();
@@ -57,7 +58,7 @@ const deleteImage = asyncHandler(async (req, res) => {
     console.log("Delete route reached");
     const id = req.params.id;
 
-    const image = await Images.findById(req.params.id);
+    const image = await Images.findById(id);
 
     // Check for user
     if (!req.user) {

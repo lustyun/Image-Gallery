@@ -59,7 +59,7 @@ const Grid = () => {
             // Send the update request to the server
             const response = await axios.put(
                 `http://localhost:5000/api/update/${_id}`,
-                { newFilename: editedFileName },
+                { fileName: editedFileName },
                 config
             );
 
