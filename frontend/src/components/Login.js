@@ -1,43 +1,117 @@
-// App.js
-
-import React, { useState } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import { FaSignInAlt } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import Spinner from "./Spinner";
+import authService from "../auth/authService";
 
 function Login() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
+    const [formData, setFormData] = useState({
+        email: "",
+        password: "",
+    });
 
-  const handleRegister = () => {
-    axios.post('/api/register', { username, password })
-      .then((response) => {
-        setMessage(response.data.message);
-      })
-      .catch((error) => {
-        setMessage(error.response.data.message);
-      });
-  };
+    const [isLoading, setIsLoading] = useState(false);
+    const [isError, setIsError] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
+    const [message, setMessage] = useState("");
 
-  const handleLogin = () => {
-    axios.post('/api/login', { username, password })
-      .then((response) => {
-        setMessage(response.data.message);
-      })
-      .catch((error) => {
-        setMessage(error.response.data.message);
-      });
-  };
+    const { email, password } = formData;
 
-  return (
-    <div className="App">
-      <h1>Registration and Login Example</h1>
-      <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-      <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      <button onClick={handleRegister}>Register</button>
-      <button onClick={handleLogin}>Login</button>
-      <p>{message}</p>
-    </div>
-  );
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (isError) {
+            toast.error(message);
+        }
+
+        if (isSuccess) {
+            navigate("/");
+        }
+    }, [isError, isSuccess, message, navigate]);
+
+    const onChange = (e) => {
+        setFormData((prevState) => ({
+            ...prevState,
+            [e.target.name]: e.target.value,
+        }));
+    };
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+
+        setIsLoading(true);
+
+        const userData = {
+            email,
+            password,
+        };
+
+        try {
+            const response = await authService.login(userData); // Use your authService to handle authentication
+
+            if (response) {
+                localStorage.setItem("user", JSON.stringify(response));
+                setIsSuccess(true);
+            } else {
+                setIsError(true);
+                setMessage("Authentication failed. Please try again.");
+            }
+        } catch (error) {
+            setIsError(true);
+            setMessage("Authentication failed. Please try again.");
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    if (isLoading) {
+        return <Spinner />;
+    }
+
+    return (
+        <>
+            <section className="heading">
+                <h1>
+                    <FaSignInAlt /> Login
+                </h1>
+                <p>Login and start setting goals</p>
+            </section>
+
+            <section className="form">
+                <form onSubmit={onSubmit}>
+                    <div className="form-group">
+                        <input
+                            type="email"
+                            className="form-control"
+                            id="email"
+                            name="email"
+                            value={email}
+                            placeholder="Enter your email"
+                            onChange={onChange}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <input
+                            type="password"
+                            className="form-control"
+                            id="password"
+                            name="password"
+                            value={password}
+                            placeholder="Enter password"
+                            onChange={onChange}
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <button type="submit" className="btn btn-block">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </section>
+        </>
+    );
 }
 
 export default Login;

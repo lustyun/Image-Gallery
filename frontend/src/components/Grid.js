@@ -1,16 +1,23 @@
 import React from "react";
+import Button from "./Button";
+import axios from "axios"; // Import Axios
 
-const Grid = ({ photos, setPhotos }) => {
+const Grid = ({ photos, setPhotos, setUpdateUI }) => {
     const handleDelete = async (photoId) => {
         try {
-            const response = await fetch(
+            const user = JSON.parse(localStorage.getItem("user"));
+            const token = user && user.token;
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            };
+            const response = await axios.delete(
                 `http://localhost:5000/api/delete/${photoId}`,
-                {
-                    method: "DELETE",
-                }
+                config
             );
 
-            if (response.ok) {
+            if (response.status === 200) {
                 // Photo deleted successfully, update your state to remove the deleted photo
                 setPhotos((prevPhotos) =>
                     prevPhotos.filter((photo) => photo._id !== photoId)
@@ -22,6 +29,7 @@ const Grid = ({ photos, setPhotos }) => {
             console.error("Error deleting photo:", error);
         }
     };
+
     return (
         <>
             <h1>Our Gallery</h1>
@@ -39,6 +47,7 @@ const Grid = ({ photos, setPhotos }) => {
                     </div>
                 ))}
             </div>
+            <Button setUpdateUI={setUpdateUI} />;
         </>
     );
 };

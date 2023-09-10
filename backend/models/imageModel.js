@@ -16,4 +16,4 @@ const uploadSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-module.exports = mongoose.model("Images", uploadSchema);
+module.exports = mongoose.model("Uploads", uploadSchema);

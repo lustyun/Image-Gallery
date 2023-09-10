@@ -2,11 +2,14 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
+require('dotenv').config();
 
 // @desc    Register new user
 // @route   POST /api/users
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
+    console.log("Received registration request"); // Add this line
+
     const { name, email, password } = req.body;
 
     if (!name || !email || !password) {
@@ -50,6 +53,9 @@ const registerUser = asyncHandler(async (req, res) => {
 // @route   POST /api/users/login
 // @access  Public
 const loginUser = asyncHandler(async (req, res) => {
+
+    console.log("Received login request"); // Add this line
+
     const { email, password } = req.body;
 
     // Check for user email

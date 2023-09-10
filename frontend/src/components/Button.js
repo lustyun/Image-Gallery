@@ -5,13 +5,21 @@ import axios from "axios";
 const Button = ({ setUpdateUI }) => {
     const handleChange = (e) => {
         e.preventDefault();
+        const user = JSON.parse(localStorage.getItem("user"));
+        const token = user && user.token;
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
 
         const formData = new FormData();
         formData.append("photo", e.target.files[0]);
         formData.append("fileName", "examplename");
 
         axios
-            .post("http://localhost:5000/api/save", formData)
+            .post("http://localhost:5000/api/save", formData, config)
             .then((res) => {
                 console.log(res.data);
                 setUpdateUI(res.data._id);
