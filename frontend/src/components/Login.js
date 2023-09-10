@@ -26,6 +26,7 @@ function Login() {
         }
 
         if (isSuccess) {
+            toast.success(message);
             navigate("/");
         }
     }, [isError, isSuccess, message, navigate]);
@@ -48,11 +49,12 @@ function Login() {
         };
 
         try {
-            const response = await authService.login(userData); // Use your authService to handle authentication
+            const response = await authService.login(userData);
 
             if (response) {
                 localStorage.setItem("user", JSON.stringify(response));
                 setIsSuccess(true);
+                setMessage("Login successful.");
             } else {
                 setIsError(true);
                 setMessage("Authentication failed. Please try again.");

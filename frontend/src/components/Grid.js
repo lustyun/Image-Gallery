@@ -1,17 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "./Button";
-import axios from "axios"; // Import Axios
+import axios from "axios";
+import { FaTrash } from "react-icons/fa";
+import { toast } from "react-toastify";
 
-const Grid = ({ photos, setPhotos, setUpdateUI }) => {
+const Grid = () => {
+    const [photos, setPhotos] = useState([]);
+    const [updateUI, setUpdateUI] = useState("");
+    const [isEditing, setIsEditing] = useState(false);
+    const [editedFileName, setEditedFileName] = useState("");
+
+    const user = JSON.parse(localStorage.getItem("user"));
+    const token = user && user.token;
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    };
+    useEffect(() => {
+        axios
+            .get("http://localhost:5000/api/get", config)
+            .then((res) => {
+                console.log(res.data);
+                setPhotos(res.data);
+            })
+            .catch((err) => console.log(err));
+    }, [updateUI]);
+
     const handleDelete = async (photoId) => {
         try {
-            const user = JSON.parse(localStorage.getItem("user"));
-            const token = user && user.token;
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            };
             const response = await axios.delete(
                 `http://localhost:5000/api/delete/${photoId}`,
                 config
@@ -30,9 +47,43 @@ const Grid = ({ photos, setPhotos, setUpdateUI }) => {
         }
     };
 
+    // Function to handle editing
+    const handleEditClick = (fileName) => {
+        setIsEditing(true);
+        setEditedFileName(fileName);
+    };
+
+    // Function to handle saving changes
+    const handleSaveChanges = async (_id) => {
+        try {
+            // Send the update request to the server
+            const response = await axios.put(
+                `http://localhost:5000/api/update/${_id}`,
+                { newFilename: editedFileName },
+                config
+            );
+
+            if (response.status === 200) {
+                // Update was successful
+                toast.success("Filename updated successfully.");
+
+                // You can also update the UI here to reflect the changes
+                // For example, you can update the filename in your local state
+            } else {
+                // Handle errors if the server request was not successful
+                toast.error("Failed to update filename. Please try again.");
+            }
+
+            setIsEditing(false); // Exit edit mode
+        } catch (error) {
+            // Handle any network errors or exceptions
+            toast.error("Failed to update filename. Please try again.");
+        }
+    };
+
     return (
         <>
-            <h1>Our Gallery</h1>
+            <h1>My Gallery</h1>
             <div className="grid">
                 {photos.map(({ fileName, photo, _id }) => (
                     <div key={_id} className="grid__item">
@@ -40,10 +91,37 @@ const Grid = ({ photos, setPhotos, setUpdateUI }) => {
                             src={`http://localhost:5000/uploads/${photo}`}
                             alt="grid_image"
                         />
-                        <button onClick={() => handleDelete(_id)}>
-                            Delete
-                        </button>
-                        <h2>{fileName}</h2>
+                        <div className="imageInfo">
+                            {isEditing ? (
+                                <>
+                                    <input
+                                        type="text"
+                                        value={editedFileName}
+                                        onChange={(e) =>
+                                            setEditedFileName(e.target.value)
+                                        }
+                                    />
+                                    <button
+                                        onClick={() => handleSaveChanges(_id)}>
+                                        Save
+                                    </button>
+                                </>
+                            ) : (
+                                <>
+                                    <h2>{fileName}</h2>
+                                    <button
+                                        onClick={() =>
+                                            handleEditClick(fileName)
+                                        }>
+                                        Edit
+                                    </button>
+                                </>
+                            )}
+                        </div>
+                        <FaTrash
+                            className="deteleBtn"
+                            onClick={() => handleDelete(_id)}
+                        />
                     </div>
                 ))}
             </div>

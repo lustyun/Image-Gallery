@@ -5,6 +5,7 @@ const {
     getImages,
     createImage,
     deleteImage,
+    updateImage,
 } = require("../controllers/imageController");
 const { protect } = require("../middlewares/authMiddleware");
 // GET Images
@@ -17,6 +18,9 @@ router.post(
     uploadMiddleware.single("photo"),
     createImage
 );
+
+// Update title
+router.put("/api/update/:id", protect, updateImage);
 
 // DELETE Image
 router.delete("/api/delete/:id", protect, deleteImage);
