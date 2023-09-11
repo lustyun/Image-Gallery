@@ -40,7 +40,7 @@ function App() {
                     </Routes>
                 </div>
             </Router>
-            <ToastContainer position="top-center" />
+            <ToastContainer autoClose= "5000" position="top-center" />
         </>
     );
 }
