@@ -5,7 +5,7 @@ import { FaUser } from "react-icons/fa";
 import Spinner from "../components/Spinner";
 import authService from "../auth/authService";
 
-function Register() {
+function Register({setAuthenticated}) {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -46,6 +46,7 @@ function Register() {
 
                 // Registration successful, you can redirect or handle success as needed
                 setIsLoading(false);
+                setAuthenticated(true)
                 toast.success("Registration successful");
                 navigate("/"); // Redirect to another page after successful registration
             } catch (error) {

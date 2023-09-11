@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
 * {
     margin: 0;
     padding: 0;
@@ -16,9 +15,12 @@
     bottom: 0;
     margin: 2rem;
 }
-
+.gridHeader{
+    height: 150px
+}
 .grid {
     display: grid;
+    justify-content: center;
     grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
     padding: 5rem;
@@ -29,9 +31,8 @@
     display: flex; /* Use flex display for aligning items vertically */
     flex-direction: column; /* Stack items vertically */
     align-items: center; /* Center items horizontally */
-    height: 30rem;
     color: #050505;
-    min-width: 500px;
+    min-width: 300px;
     border-radius: 6px;
     background-color: #474a512a;
     overflow: hidden;
@@ -90,7 +91,6 @@ h1 {
     margin: 2rem 5rem;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
 
 * {
     margin: 0;
@@ -177,31 +177,9 @@ h3 {
     color: #828282;
 }
 
-.goals {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-}
-
-.goal {
-    background-color: #f4f4f4;
-    margin: 10px 0;
-    padding: 20px 0 10px;
-    position: relative;
-}
-
-.goal .close {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    cursor: pointer;
-    border: none;
-    background: none;
-}
-
 .form,
 .content {
-    width: 70%;
+    width: 20%;
     margin: 0 auto;
 }
 
@@ -228,9 +206,9 @@ h3 {
 
 .btn {
     padding: 10px 20px;
-    border: 1px solid #000;
+    border: 1px solid;
     border-radius: 5px;
-    background: #000;
+    background: rgb(0, 195, 209);;
     color: #fff;
     font-size: 16px;
     font-weight: 700;

@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import Spinner from "./Spinner";
 import authService from "../auth/authService";
 
-function Login() {
+function Login({ setAuthenticated }) {
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -27,6 +27,7 @@ function Login() {
 
         if (isSuccess) {
             toast.success(message);
+            setAuthenticated(true);
             navigate("/");
         }
     }, [isError, isSuccess, message, navigate]);
@@ -77,7 +78,7 @@ function Login() {
                 <h1>
                     <FaSignInAlt /> Login
                 </h1>
-                <p>Login and start setting goals</p>
+                <p>Login to view images</p>
             </section>
 
             <section className="form">

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "./Button";
 import axios from "axios";
 import { FaTrash } from "react-icons/fa";
@@ -10,6 +11,8 @@ const Grid = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [editedFileName, setEditedFileName] = useState("");
 
+    const navigate = useNavigate();
+
     const user = JSON.parse(localStorage.getItem("user"));
     const token = user && user.token;
     const config = {
@@ -18,6 +21,8 @@ const Grid = () => {
         },
     };
     useEffect(() => {
+        if (!user) navigate("/login");
+
         axios
             .get("http://localhost:5000/api/get", config)
             .then((res) => {
@@ -83,7 +88,10 @@ const Grid = () => {
 
     return (
         <>
-            <h1>My Gallery</h1>
+            <div className="gridHeader">
+                <h1>{user && user.name}'s Gallery</h1>
+                <h4>{user && user.email}</h4>
+            </div>
             <div className="grid">
                 {photos.map(({ fileName, photo, _id }) => (
                     <div key={_id} className="grid__item">
