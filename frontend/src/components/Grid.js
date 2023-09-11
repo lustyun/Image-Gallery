@@ -132,12 +132,13 @@ const Grid = () => {
             </div>
             <div className="grid">
                 {photos.map(({ fileName, photo, _id }) => (
-                    <div
-                        key={_id}
-                        className="grid__item"
-                        onClick={() => handleOpenPopup({ fileName, photo })}>
+                    <div key={_id} className="grid__item">
                         {photo.endsWith(".mp4") || photo.endsWith(".avi") ? (
-                            <video controls>
+                            <video
+                                controls
+                                onClick={() =>
+                                    handleOpenPopup({ fileName, photo })
+                                }>
                                 <source
                                     src={`http://localhost:5000/uploads/${photo}`}
                                     type="video/mp4"
@@ -148,6 +149,9 @@ const Grid = () => {
                             <img
                                 src={`http://localhost:5000/uploads/${photo}`}
                                 alt="grid_image"
+                                onClick={() =>
+                                    handleOpenPopup({ fileName, photo })
+                                }
                             />
                         )}
                         <div className="imageInfo">
