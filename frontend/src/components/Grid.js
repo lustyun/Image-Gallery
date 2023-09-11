@@ -4,12 +4,27 @@ import Button from "./Button";
 import axios from "axios";
 import { FaTrash } from "react-icons/fa";
 import { toast } from "react-toastify";
+import ImagePopup from "./ImagePopup";
 
 const Grid = () => {
     const [photos, setPhotos] = useState([]);
     const [updateUI, setUpdateUI] = useState("");
     const [isEditing, setIsEditing] = useState({});
     const [editedFileNames, setEditedFileNames] = useState({});
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [selectedItem, setSelectedItem] = useState(null);
+
+    // Function to open the popup
+    const handleOpenPopup = (item) => {
+        setSelectedItem(item);
+        setIsPopupOpen(true);
+    };
+
+    // Function to close the popup
+    const handleClosePopup = () => {
+        setSelectedItem(null);
+        setIsPopupOpen(false);
+    };
 
     const navigate = useNavigate();
 
@@ -117,11 +132,24 @@ const Grid = () => {
             </div>
             <div className="grid">
                 {photos.map(({ fileName, photo, _id }) => (
-                    <div key={_id} className="grid__item">
-                        <img
-                            src={`http://localhost:5000/uploads/${photo}`}
-                            alt="grid_image"
-                        />
+                    <div
+                        key={_id}
+                        className="grid__item"
+                        onClick={() => handleOpenPopup({ fileName, photo })}>
+                        {photo.endsWith(".mp4") || photo.endsWith(".avi") ? (
+                            <video controls>
+                                <source
+                                    src={`http://localhost:5000/uploads/${photo}`}
+                                    type="video/mp4"
+                                />
+                                Your browser does not support the video tag.
+                            </video>
+                        ) : (
+                            <img
+                                src={`http://localhost:5000/uploads/${photo}`}
+                                alt="grid_image"
+                            />
+                        )}
                         <div className="imageInfo">
                             {isEditing[_id] &&
                             editedFileNames[_id] !== undefined ? (
@@ -160,6 +188,11 @@ const Grid = () => {
                     </div>
                 ))}
             </div>
+            <ImagePopup
+                isOpen={isPopupOpen}
+                handleClose={handleClosePopup}
+                selectedItem={selectedItem}
+            />
             <Button setUpdateUI={setUpdateUI} />
         </>
     );
