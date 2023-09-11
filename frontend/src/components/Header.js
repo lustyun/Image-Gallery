@@ -3,10 +3,7 @@ import { FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
 function Header({ setAuthenticated, authenticated }) {
-    const navigate = useNavigate();
-
-    const user = JSON.parse(localStorage.getItem("user"));
-    
+    const navigate = useNavigate();  
 
     const onLogout = () => {
         localStorage.removeItem("user");

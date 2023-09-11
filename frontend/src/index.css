@@ -108,7 +108,7 @@
     border-radius: 4px;
     font-size: 16px; /* Use the same font size as <h2> */
     font-family: inherit; /* Use the same font family as the default */
-    font-weight: bold; /* Set the font weight to match <h2> */
+    font-weight: 400; /* Set the font weight to match <h2> */
 }
 
 .imageInfo button {
@@ -206,8 +206,10 @@ li {
 
 h1,
 h2,
-h3 {
-    font-weight: 600;
+h3,
+h4,
+h5 {
+    font-weight: 400;
     margin-bottom: 10px;
 }
 
