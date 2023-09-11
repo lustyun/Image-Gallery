@@ -44,14 +44,9 @@
     flex-grow: 1; /* To push it to the bottom */
     display: flex;
     align-items: center;
+    flex-direction: column;
     justify-content: center; /* Center the text vertically */
     padding: 1rem;
-}
-
-.imageInfo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .imageInfo input[type="text"] {
@@ -70,7 +65,7 @@
     bottom: 0;
     left: 0;
     margin: 0.5rem;
-    background-color: #000000;
+    background-color: rgb(0, 195, 209);;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -87,7 +82,7 @@
     margin: 0.5rem;
     padding: 0.5rem;
     border-radius: 5px;
-    background-color: rgb(0, 0, 0);
+    background-color:rgb(0, 195, 209);
     color: white;
     cursor: pointer;
     font-size: 30px; /* Adjust the font size as needed */
