@@ -8,8 +8,8 @@ import { toast } from "react-toastify";
 const Grid = () => {
     const [photos, setPhotos] = useState([]);
     const [updateUI, setUpdateUI] = useState("");
-    const [isEditing, setIsEditing] = useState(false);
-    const [editedFileName, setEditedFileName] = useState("");
+    const [isEditing, setIsEditing] = useState({});
+    const [editedFileNames, setEditedFileNames] = useState({});
 
     const navigate = useNavigate();
 
@@ -53,13 +53,27 @@ const Grid = () => {
     };
 
     // Function to handle editing
-    const handleEditClick = (fileName) => {
-        setIsEditing(true);
-        setEditedFileName(fileName);
+    const handleEditClick = (fileName, _id) => {
+        setIsEditing((prevIsEditing) => ({
+            ...prevIsEditing,
+            [_id]: true,
+        }));
+        setEditedFileNames((prevEditedFileNames) => ({
+            ...prevEditedFileNames,
+            [_id]: fileName,
+        }));
+    };
+
+    const handleEditedFileNameChange = (value, _id) => {
+        setEditedFileNames((prevEditedFileNames) => ({
+            ...prevEditedFileNames,
+            [_id]: value,
+        }));
     };
 
     // Function to handle saving changes
     const handleSaveChanges = async (_id) => {
+        const editedFileName = editedFileNames[_id];
         try {
             // Send the update request to the server
             const response = await axios.put(
@@ -72,8 +86,17 @@ const Grid = () => {
                 // Update was successful
                 toast.success("Filename updated successfully.");
 
-                // You can also update the UI here to reflect the changes
-                // For example, you can update the filename in your local state
+                setPhotos((prevPhotos) =>
+                    prevPhotos.map((photo) =>
+                        photo._id === _id
+                            ? { ...photo, fileName: editedFileName }
+                            : photo
+                    )
+                );
+                setIsEditing((prevIsEditing) => ({
+                    ...prevIsEditing,
+                    [_id]: false,
+                }));
             } else {
                 // Handle errors if the server request was not successful
                 toast.error("Failed to update filename. Please try again.");
@@ -100,13 +123,17 @@ const Grid = () => {
                             alt="grid_image"
                         />
                         <div className="imageInfo">
-                            {isEditing ? (
+                            {isEditing[_id] &&
+                            editedFileNames[_id] !== undefined ? (
                                 <>
                                     <input
                                         type="text"
-                                        value={editedFileName}
+                                        value={editedFileNames[_id]}
                                         onChange={(e) =>
-                                            setEditedFileName(e.target.value)
+                                            handleEditedFileNameChange(
+                                                e.target.value,
+                                                _id
+                                            )
                                         }
                                     />
                                     <button
@@ -119,7 +146,7 @@ const Grid = () => {
                                     <h2>{fileName}</h2>
                                     <button
                                         onClick={() =>
-                                            handleEditClick(fileName)
+                                            handleEditClick(fileName, _id)
                                         }>
                                         Edit
                                     </button>

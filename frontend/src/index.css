@@ -15,8 +15,8 @@
     bottom: 0;
     margin: 2rem;
 }
-.gridHeader{
-    height: 150px
+.gridHeader {
+    height: 150px;
 }
 .grid {
     display: grid;
@@ -34,7 +34,7 @@
     color: #050505;
     min-width: 300px;
     border-radius: 6px;
-    background-color: #474a512a;
+    background-color: #474a5111;
     overflow: hidden;
     box-shadow: 0 0px 10px rgba(0, 0, 0, 0.25);
     position: relative; /* Add this to position the delete button */
@@ -46,6 +46,38 @@
     align-items: center;
     justify-content: center; /* Center the text vertically */
     padding: 1rem;
+}
+
+.imageInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imageInfo input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px; /* Use the same font size as <h2> */
+    font-family: inherit; /* Use the same font family as the default */
+    font-weight: bold; /* Set the font weight to match <h2> */
+}
+
+.imageInfo button {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0.5rem;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 3px 10px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background-color 0.3s ease;
 }
 
 .deteleBtn {
@@ -90,7 +122,6 @@ h1 {
     font-weight: 600;
     margin: 2rem 5rem;
 }
-
 
 * {
     margin: 0;
@@ -208,7 +239,7 @@ h3 {
     padding: 10px 20px;
     border: 1px solid;
     border-radius: 5px;
-    background: rgb(0, 195, 209);;
+    background: rgb(0, 195, 209);
     color: #fff;
     font-size: 16px;
     font-weight: 700;
