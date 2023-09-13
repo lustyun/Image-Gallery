@@ -57,6 +57,7 @@ function Login({ setAuthenticated }) {
                 localStorage.setItem("user", JSON.stringify(response));
                 setIsSuccess(true);
                 setMessage("Login successful.");
+                setIsError(false);
             } else {
                 setIsError(true);
                 setMessage("Authentication failed. Please try again.");
