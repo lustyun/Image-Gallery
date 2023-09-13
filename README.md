@@ -4,7 +4,7 @@
 
 Welcome to the Image Gallery project! This web application allows users to upload, view, edit, and delete images in their personal gallery. The project's main goal is to provide a user-friendly interface for managing image collections.
 
-![Screenshot of Image Gallery](screenshot.png)
+![Screenshot of Image Gallery](https://github.com/lustyun/Image-Gallery/assets/72274267/a76b6238-aefc-4d44-b989-40468f698d3a)
 
 ## Technologies Used
 
