@@ -5,9 +5,15 @@ const ImagePopup = ({ isOpen, handleClose, selectedItem }) => {
   if (!isOpen) return null;
 
   const { fileName, photo } = selectedItem;
+  const handlePopupClick = (e) => {
+    // Check if the click occurred on the background or "x" button
+    if (e.target.classList.contains("popup-backdrop") || e.target.classList.contains("popup-close")) {
+      handleClose();
+    }
+  };
 
   return (
-    <div className="popup-backdrop">
+    <div className="popup-backdrop" onClick={handlePopupClick}>
       <div className="popup">
         <button className="popup-close" onClick={handleClose}>
           <FaTimes />
