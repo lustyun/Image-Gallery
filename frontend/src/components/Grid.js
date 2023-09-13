@@ -35,6 +35,7 @@ const Grid = () => {
             Authorization: `Bearer ${token}`,
         },
     };
+
     useEffect(() => {
         if (!user) navigate("/login");
 
@@ -45,6 +46,7 @@ const Grid = () => {
                 setPhotos(res.data);
             })
             .catch((err) => console.log(err));
+        // eslint-disable-next-line
     }, [updateUI]);
 
     const handleDelete = async (photoId) => {

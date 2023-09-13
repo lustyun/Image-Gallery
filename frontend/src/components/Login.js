@@ -30,6 +30,7 @@ function Login({ setAuthenticated }) {
             setAuthenticated(true);
             navigate("/");
         }
+        // eslint-disable-next-line
     }, [isError, isSuccess, message, navigate]);
 
     const onChange = (e) => {
