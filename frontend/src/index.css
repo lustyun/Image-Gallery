@@ -6,7 +6,6 @@
     font-family: "poppins", sans-serif;
 }
 
-
 .button {
     color: rgb(0, 195, 209);
     font-size: 60px;
@@ -28,7 +27,7 @@
     border-radius: 8px;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
     background: white;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     color: #050505;
 }
 
@@ -63,9 +62,6 @@
     transition: background-color 0.3s ease;
 }
 
-
-
-
 .gridHeader {
     height: 150px;
 }
@@ -83,7 +79,8 @@
     flex-direction: column; /* Stack items vertically */
     align-items: center; /* Center items horizontally */
     color: #050505;
-    min-width: 300px;
+    width: 400px;
+    height: 480px;
     border-radius: 6px;
     background-color: #474a5111;
     overflow: hidden;
@@ -116,7 +113,7 @@
     bottom: 0;
     left: 0;
     margin: 0.5rem;
-    background-color: rgb(0, 195, 209);;
+    background-color: rgb(0, 195, 209);
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -133,13 +130,13 @@
     margin: 0.5rem;
     padding: 0.5rem;
     border-radius: 5px;
-    background-color:rgb(0, 195, 209);
+    background-color: rgb(0, 195, 209);
     color: white;
     cursor: pointer;
     font-size: 30px; /* Adjust the font size as needed */
 }
 
-.grid__item img  {
+.grid__item img {
     width: 100%;
     height: 100%; /* Let the image determine its own height */
     object-fit: cover;
@@ -373,7 +370,6 @@ h5 {
     }
 }
 
-
 /* image popup */
 
 .popup-backdrop {
@@ -387,11 +383,9 @@ h5 {
     align-items: center;
     justify-content: center;
     z-index: 1000; /* Ensure it's above other content */
-  }
-  
+}
 
-  
-  .popup {
+.popup {
     background-color: #fff;
     width: 1280px; /* Adjust the width as needed */
     height: 720px; /* Adjust the height as needed */
@@ -399,25 +393,23 @@ h5 {
     border-radius: 5px;
     position: relative;
     z-index: 1001;
-  }
-  
-  
-  .popup-content {
+}
+
+.popup-content {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-  }
-  
-  .popup-media {
+}
+
+.popup-media {
     max-width: 100%;
     max-height: 100%;
-  }
-  
-  
-  .popup-close {
+}
+
+.popup-close {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -426,5 +418,4 @@ h5 {
     cursor: pointer;
     font-size: 20px;
     color: #777;
-  }
-  
+}
