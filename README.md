@@ -16,7 +16,7 @@ Welcome to the Image Gallery project! This web application allows users to uploa
 
 ## Getting Started
 
-- **Planning (Trello Board):** [Trello Board]([https://trello.com/link-to-your-trello-board](https://trello.com/b/iQeocnNY/fardus-image-gallery))
+- **Planning (Trello Board):** [Trello Board](https://trello.com/b/iQeocnNY/fardus-image-gallery)
 
 ## Unsolved Problems
 
